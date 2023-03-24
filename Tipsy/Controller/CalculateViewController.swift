@@ -41,15 +41,23 @@ class CalculateViewController: UIViewController {
         let billAmountText = billAmountText.text ?? ""
         let billAmount = Double(billAmountText) ?? 0.0
         
-        let amount = calculatorBrain.calculateBillSplit(billAmount: billAmount)
+        calculatorBrain.calculateBillSplit(billAmount: billAmount)
         
-        print("Bill amount per person is \(amount)!")
+        performSegue(withIdentifier: "goToResultScreen", sender: self)
     }
     
     func deselectTipButtons() {
         zeroPercenButton.isSelected = false
         tenPercentButton.isSelected = false
         twentyPercentButton.isSelected = false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "goToResultScreen"){
+            let destination = segue.destination as? ResultViewController
+            
+            destination?.calculatorBrain = self.calculatorBrain
+        }
     }
 }
 

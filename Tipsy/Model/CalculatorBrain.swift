@@ -13,11 +13,13 @@ struct CalculatorBrain {
     
     var tipPercentage: Int = 10
     var splitNumber = 2
+    var amount: String?
     
-    func calculateBillSplit(billAmount: Double) -> String {
+    mutating func calculateBillSplit(billAmount: Double) {
         let tipAmount = (Double(tipPercentage) * billAmount) / 100.0
         let amountBySplit = (billAmount + tipAmount) / Double(splitNumber)
-        return String(format: "%.2f", amountBySplit)
+        
+        amount = String(format: "%.2f", amountBySplit)
     }
     
     mutating func setTipPercentage(tipPercentage: String)  {
@@ -34,4 +36,11 @@ struct CalculatorBrain {
         self.splitNumber = splitNumber
     }
     
+    func getAmount() -> String? {
+        return amount
+    }
+    
+    func getSplitDescription() -> String {
+        return "Split between \(splitNumber) people, with \(tipPercentage)% tip."
+    }
 }

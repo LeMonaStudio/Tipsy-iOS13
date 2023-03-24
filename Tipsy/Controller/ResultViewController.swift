@@ -10,9 +10,22 @@ import UIKit
 
 class ResultViewController: UIViewController {
 
+    @IBOutlet weak var billSplitAmountLabel: UILabel!
+    
+    @IBOutlet weak var splitDescriptionLabel: UILabel!
+    
+    var calculatorBrain: CalculatorBrain?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        billSplitAmountLabel.text = calculatorBrain?.getAmount()
+        splitDescriptionLabel.text = calculatorBrain?.getSplitDescription()
     }
+    
+    @IBAction func recalculateButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
